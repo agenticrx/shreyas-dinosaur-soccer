@@ -1,6 +1,6 @@
 const pages=[...document.querySelectorAll('.page')],nav=[...document.querySelectorAll('nav button')];let completed=JSON.parse(localStorage.getItem('dkCompleted')||'[]'),xp=Number(localStorage.getItem('dkxp')||120),quotes=['Every great player starts with one brave practice.','Be curious like a scientist and persistent like a champion.','Small steps today build big skills tomorrow.','Mistakes are clues that help your brain level up.','Read the evidence, make your play, and keep learning.','A strong team listens, learns, and tries again.','Your next great idea could be hiding in the next paragraph.'];
-// Keep the learner's personal name out of educational content. The UI may still personalize the dashboard.
-function sanitizeLearningContent(){const raw=JSON.stringify(CHAPTERS);const clean=raw.replace(/Shreyas/gi,'Alex');return JSON.parse(clean)}
+// Educational content must use fictional/neutral names only. Personal names are never rendered in lessons, questions, choices, or examples.
+function sanitizeLearningContent(){const raw=JSON.stringify(CHAPTERS);const clean=raw.replace(/Shreyas/gi,'Alex').replace(/Nagesh/gi,'Jordan');return JSON.parse(clean)}
 const LEARNING_CHAPTERS=sanitizeLearningContent();
 function showPage(id){pages.forEach(p=>p.classList.toggle('active',p.id===id));nav.forEach(b=>b.classList.toggle('active',b.dataset.page===id));if(id==='library')renderLibrary('all');if(id==='learn')renderPath();if(id==='quiz')renderQuizChapters();if(id==='progress')renderProgress();location.hash=id;window.scrollTo({top:0,behavior:'smooth'})}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-page]');if(b)showPage(b.dataset.page)});
